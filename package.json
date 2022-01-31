@@ -1,0 +1,54 @@
+{
+  "name": "koishi-plugin-adapter-wechaty",
+  "description": "Koishi 的 [Wechaty](https://wechaty.js.org/) 适配器插件",
+  "version": "1.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "lint": "eslint --fix .",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty.git"
+  },
+  "author": "Nanahira <nanahira@momobako.com>",
+  "license": "MIT",
+  "keywords": [
+    "Koishi.js",
+    "qqbot",
+    "cqhttp",
+    "onebot"
+  ],
+  "bugs": {
+    "url": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty/issues"
+  },
+  "homepage": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty",
+  "peerDependencies": {
+    "koishi": "^4.1.1"
+  },
+  "dependencies": {
+    "moment": "^2.29.1",
+    "qrcode-terminal": "^0.12.0",
+    "schemastery-gen": "^2.3.2",
+    "source-map-support": "^0.5.21",
+    "wechaty": "^1.10.4",
+    "wechaty-puppet": "^1.10.2"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "koishi": "^4.1.1",
+    "prettier": "^2.5.1",
+    "raw-loader": "^4.0.2",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.67.0",
+    "webpack-cli": "^4.9.2",
+    "ws": "^8.4.2"
+  }
+}
