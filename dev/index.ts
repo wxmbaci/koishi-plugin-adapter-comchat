@@ -1,5 +1,5 @@
 import { App, segment } from 'koishi';
-import TargetPlugin from '../src';
+import TargetPlugin from '../dist';
 import * as Help from '@koishijs/plugin-help';
 import ExtrasInDev from './extras';
 import fs from 'fs';

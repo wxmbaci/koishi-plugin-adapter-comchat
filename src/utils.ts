@@ -1,7 +1,7 @@
 import { segment, Universal, Element, Awaitable } from 'koishi';
-import { ContactInterface } from 'wechaty/src/user-modules/contact';
-import { RoomInterface } from 'wechaty/src/user-modules/room';
-import { MessageInterface } from 'wechaty/src/user-modules/message';
+import type { ContactInterface } from 'wechaty/src/user-modules/contact';
+import type { RoomInterface } from 'wechaty/src/user-modules/room';
+import type { MessageInterface } from 'wechaty/src/user-modules/message';
 import WechatyBot from './index';
 import FileType from 'file-type';
 
@@ -80,10 +80,8 @@ export async function messageToElement(
         let text = message.text();
         for (const mention of mentions) {
           const name = mention.name();
-          console.log('mention', name);
           text = text.replace(new RegExp(`@${name}\\s+`, 'g'), '');
         }
-        console.log(text);
         elements.push(segment.text(text));
         break;
       case MessageType.Image:
