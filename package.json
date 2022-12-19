@@ -1,0 +1,87 @@
+{
+  "name": "koishi-plugin-adapter-wechaty",
+  "description": "Koishi 微信适配器。",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "lint": "eslint --fix .",
+    "build": "webpack",
+    "start": "ts-node ./dev",
+    "test": "jest --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty.git"
+  },
+  "author": "Nanahira <nanahira@momobako.com>",
+  "license": "MIT",
+  "keywords": [
+    "Koishi.js",
+    "qqbot",
+    "cqhttp",
+    "onebot",
+    "wechat",
+    "wechaty"
+  ],
+  "bugs": {
+    "url": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty/issues"
+  },
+  "homepage": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "tests",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "file-type": "16.5.3",
+    "koishi-thirdeye": "^11.1.14",
+    "wechaty": "^1.20.2",
+    "wechaty-puppet-wechat": "^1.18.4"
+  },
+  "peerDependencies": {
+    "koishi": "^4.10.6"
+  },
+  "devDependencies": {
+    "@koishijs/plugin-help": "^2.0.0",
+    "@types/jest": "^29.2.4",
+    "@types/node": "^18.11.17",
+    "@types/raven": "^2.5.4",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "eslint": "8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.3.1",
+    "prettier": "^2.8.1",
+    "raven": "^2.6.4",
+    "raw-loader": "^4.0.2",
+    "ts-jest": "^29.0.3",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "ws": "^8.11.0"
+  },
+  "koishi": {
+    "category": "adapter",
+    "service": {
+      "implements": [
+        "adapter"
+      ]
+    }
+  }
+}

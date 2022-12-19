@@ -1,0 +1,59 @@
+stages:
+  - install
+  - build
+  - deploy
+
+variables:
+  GIT_DEPTH: "1"
+
+npm_ci:
+  stage: install
+  tags:
+    - linux
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules
+
+.build_base:
+  stage: build
+  tags:
+    - linux
+  dependencies:
+    - npm_ci
+
+build:
+  extends: .build_base
+  script: npm run build
+  artifacts:
+    paths:
+      - dist/
+
+test:
+  extends: .build_base
+  script: npm run test
+
+upload_to_minio:
+  stage: deploy
+  dependencies:
+    - build
+  tags:
+    - linux
+  script:
+    - aws s3 --endpoint=https://minio.mycard.moe:9000 sync --delete dist/full/ s3://nanahira/koishi-plugin/adapter-wechaty
+  only:
+    - master
+
+deploy_npm:
+  stage: deploy
+  dependencies:
+    - build
+  tags:
+    - linux
+  script:
+    - apt update;apt -y install coreutils
+    - echo $NPMRC | base64 --decode > ~/.npmrc
+    - npm publish . --access public && curl -X PUT "https://registry-direct.npmmirror.com/$(cat package.json | jq '.name' | sed 's/\"//g')/sync?sync_upstream=true" || true
+  only:
+    - master
