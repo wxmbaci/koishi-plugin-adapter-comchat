@@ -3,6 +3,7 @@ import {
   DefinePlugin,
   InjectLogger,
   PluginDef,
+  PluginSchema,
   RegisterSchema,
   Reusable,
   SchemaProperty,
@@ -45,6 +46,7 @@ export class WechatyBotConfig {
 }
 
 @Reusable()
+@PluginSchema(WechatyBotConfig)
 @DefinePlugin()
 export default class WechatyBot extends Bot<Partial<WechatyBotConfig>> {
   internal: WechatyInstance;

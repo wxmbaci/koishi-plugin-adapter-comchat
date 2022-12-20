@@ -6,7 +6,7 @@
   "types": "dist/src/index.d.ts",
   "scripts": {
     "lint": "eslint --fix .",
-    "build": "webpack",
+    "build": "rimraf dist && tsc",
     "start": "ts-node ./dev",
     "test": "jest --passWithNoTests"
   },
@@ -68,6 +68,7 @@
     "prettier": "^2.8.1",
     "raven": "^2.6.4",
     "raw-loader": "^4.0.2",
+    "rimraf": "^3.0.2",
     "ts-jest": "^29.0.3",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
