@@ -27,7 +27,7 @@ export class WechatyBotConfig {
   name: string;
 
   @SchemaProperty({
-    default: 'wechaty-wechat-puppet',
+    default: 'wechaty-puppet-wechat',
     description: 'Wechaty 使用的 Puppet。',
     hidden: true,
   })
