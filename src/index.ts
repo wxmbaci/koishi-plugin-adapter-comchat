@@ -10,10 +10,10 @@ import {
   UsePlugin,
 } from 'koishi-thirdeye';
 import { Bot, Fragment, Logger, Schema, segment, SendOptions } from 'koishi';
-import { WechatyBuilder } from 'wechaty';
+import { WechatyBuilder, WechatyOptions } from 'wechaty';
 import { WechatyEvents, WechatyInstance } from './def';
 import { WechatyAdapter } from './adapter';
-import { adaptContact, adaptMessage, adaptRoom } from './utils';
+import { adaptContact, adaptMessage, adaptRoom, fileBoxToUrl } from './utils';
 import { WechatyMessenger } from './message';
 
 declare module 'koishi' {
@@ -48,7 +48,9 @@ export class WechatyBotConfig {
 @Reusable()
 @PluginSchema(WechatyBotConfig)
 @DefinePlugin()
-export default class WechatyBot extends Bot<Partial<WechatyBotConfig>> {
+export default class WechatyBot extends Bot<
+  Partial<WechatyBotConfig & WechatyOptions>
+> {
   internal: WechatyInstance;
 
   @InjectLogger()
@@ -56,17 +58,15 @@ export default class WechatyBot extends Bot<Partial<WechatyBotConfig>> {
 
   @UsePlugin()
   loadAdapter() {
-    this.internal = WechatyBuilder.build({
-      name: this.config.name,
-      puppetOptions: this.config.puppetOptions,
-      puppet: this.config.puppet as any,
-    });
+    this.internal = WechatyBuilder.build(this.config as any);
     return PluginDef(WechatyAdapter, this);
   }
 
   async initialize() {
-    this.internal.on('login', (user) => {
+    this.internal.on('login', async (user) => {
       this.selfId = user.id;
+      this.username = user.name();
+      this.avatar = await fileBoxToUrl(await user.avatar());
       this.online();
     });
     this.internal.on('logout', () => {

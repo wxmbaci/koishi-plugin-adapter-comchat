@@ -19,7 +19,9 @@ app.plugin(TargetPlugin, {
 });
 
 app.on('bot-status-updated', (bot) =>
-  console.log(`Bot ${bot.selfId} status updated: ${bot.status}`),
+  console.log(
+    `Bot ${bot.sid} ${bot.username} ${bot.avatar?.length} status updated: ${bot.status}`,
+  ),
 );
 app.on('message', (session) =>
   console.log(`Got message from ${session.channelId}: ${session.content}`),
