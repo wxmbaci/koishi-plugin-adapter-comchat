@@ -47,12 +47,13 @@
   },
   "dependencies": {
     "file-type": "16.5.3",
-    "koishi-thirdeye": "^11.1.14",
+    "koishi-thirdeye": "^11.1.20",
+    "mime2ext": "^1.0.1",
     "wechaty": "^1.20.2",
     "wechaty-puppet-wechat": "^1.18.4"
   },
   "peerDependencies": {
-    "koishi": "^4.10.6"
+    "koishi": "^4.11.0"
   },
   "devDependencies": {
     "@koishijs/plugin-help": "^2.0.0",

@@ -4,6 +4,7 @@ import type { RoomInterface } from 'wechaty/src/user-modules/room';
 import type { MessageInterface } from 'wechaty/src/user-modules/message';
 import WechatyBot from './index';
 import FileType from 'file-type';
+import mime2ext from 'mime2ext';
 
 export type ContactLike = Pick<
   ContactInterface,
@@ -28,7 +29,9 @@ export const fileBoxToUrl = async (file: FileBoxLike): Promise<string> => {
   } catch (e) {
     buf = file['stream'];
   }
-  return `base64://${buf.toString('base64')}`;
+  const fileType = await FileType.fromBuffer(buf);
+  const mime = fileType ? fileType.mime : 'application/octet-stream';
+  return `data:${mime};base64,${buf.toString('base64')}`;
 };
 
 export const adaptContact = async (
@@ -173,6 +176,16 @@ export async function autoFilename(url: string) {
     const type = await FileType.fromBuffer(buf);
     return `file.${type.ext}`;
   }
+  if (url.startsWith('data:')) {
+    const [, mime, base64] = url.match(/^data:([^;]+);base64,(.+)$/);
+    const ext = mime2ext(mime);
+    if (ext) {
+      return `file.${ext}`;
+    }
+    const buf = Buffer.from(base64, 'base64');
+    const type = await FileType.fromBuffer(buf);
+    return `file.${type?.ext || 'bin'}`;
+  }
   return path.basename(new URL(url).pathname);
 }
 
@@ -186,6 +199,11 @@ export const elementToFileBox = async (element: Element) => {
   }
   if (url.startsWith('base64://')) {
     return FileBox.fromBase64(url.slice(9), file || (await autoFilename(url)));
+  }
+  if (url.startsWith('data:')) {
+    const [, mime, base64] = url.match(/^data:([^;]+);base64,(.+)$/);
+    const ext = mime2ext(mime) || 'bin';
+    return FileBox.fromBase64(base64, file || `file.${ext}`);
   }
   return FileBox.fromUrl(url, {
     name: file || (await autoFilename(url)),

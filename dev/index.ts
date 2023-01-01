@@ -36,7 +36,10 @@ app
 app
   .command('image')
   .action(async () =>
-    segment.image(await fs.promises.readFile(__dirname + '/10000.jpg')),
+    segment.image(
+      await fs.promises.readFile(__dirname + '/10000.jpg'),
+      'image/jpeg',
+    ),
   );
 
 app
