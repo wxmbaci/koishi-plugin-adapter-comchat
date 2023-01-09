@@ -47,16 +47,16 @@
   },
   "dependencies": {
     "file-type": "16.5.3",
-    "koishi-thirdeye": "^11.1.20",
+    "koishi-thirdeye": "^11.1.21",
     "mime2ext": "^1.0.1",
     "wechaty": "^1.20.2",
     "wechaty-puppet-wechat": "^1.18.4"
   },
   "peerDependencies": {
-    "koishi": "^4.11.0"
+    "koishi": "^4.11.1"
   },
   "devDependencies": {
-    "@koishijs/plugin-help": "^2.0.0",
+    "@koishijs/plugin-help": "^2.0.2",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.17",
     "@types/raven": "^2.5.4",
