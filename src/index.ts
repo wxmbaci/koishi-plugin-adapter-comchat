@@ -76,8 +76,13 @@ export default class WechatyBot extends Bot<
       this.offline(error);
     });
     this.internal.on('scan', (qrcode, status) => {
-      this.logger.info(`Scan (${status}):`);
-      qrcodeTerminal.generate(qrcode);
+      qrcodeTerminal.generate(qrcode, { small: false }, (img) =>
+        this.logger.info(
+          `Scan (${status}): https://wechaty.js.org/qrcode/${encodeURIComponent(
+            qrcode,
+          )}\n` + img,
+        ),
+      );
     });
     await this.internal.start();
   }

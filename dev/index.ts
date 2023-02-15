@@ -3,12 +3,17 @@ import TargetPlugin from '../src';
 import * as Help from '@koishijs/plugin-help';
 import ExtrasInDev from './extras';
 import fs from 'fs';
+import Console from '@koishijs/plugin-console';
+import LogProvider from '@koishijs/plugin-logger';
 
 const app = new App({
   prefix: '.',
+  port: 14514,
 });
 
 app.plugin(Help);
+app.plugin(Console);
+app.plugin(LogProvider);
 
 // Some extras
 app.plugin(ExtrasInDev);

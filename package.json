@@ -57,7 +57,9 @@
     "koishi": "^4.11.1"
   },
   "devDependencies": {
+    "@koishijs/plugin-console": "^5.4.0",
     "@koishijs/plugin-help": "^2.0.2",
+    "@koishijs/plugin-logger": "^2.2.3",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.17",
     "@types/qrcode-terminal": "^0.12.0",
