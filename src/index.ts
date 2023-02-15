@@ -14,6 +14,7 @@ import { WechatyEvents, WechatyInstance } from './def';
 import { WechatyAdapter } from './adapter';
 import { adaptContact, adaptMessage, adaptRoom, fileBoxToUrl } from './utils';
 import { WechatyMessenger } from './message';
+import qrcodeTerminal from 'qrcode-terminal';
 
 declare module 'koishi' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -75,11 +76,8 @@ export default class WechatyBot extends Bot<
       this.offline(error);
     });
     this.internal.on('scan', (qrcode, status) => {
-      this.logger.info(
-        `Scan (${status}): https://wechaty.js.org/qrcode/${encodeURIComponent(
-          qrcode,
-        )}`,
-      );
+      this.logger.info(`Scan (${status}):`);
+      qrcodeTerminal.generate(qrcode);
     });
     await this.internal.start();
   }
