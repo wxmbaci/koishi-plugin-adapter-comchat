@@ -46,7 +46,7 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "file-type": "16.5.3",
+    "file-type": "16.5.4",
     "koishi-thirdeye": "^11.1.21",
     "mime2ext": "^1.0.1",
     "qrcode-terminal": "^0.12.0",
