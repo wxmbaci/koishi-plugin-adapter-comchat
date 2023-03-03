@@ -32,7 +32,7 @@ export class WechatyBotConfig {
     description: 'Wechaty 使用的 Puppet。',
     hidden: os.platform() !== 'win32',
     type: process.env.KOISHI_AGENT?.includes('Desktop')
-      ? Schema.const([
+      ? Schema.union([
           'wechaty-puppet-wechat',
           ...(os.platform() === 'win32' ? ['wechaty-puppet-xp'] : []),
         ])
