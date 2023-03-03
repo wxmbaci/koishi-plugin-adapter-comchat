@@ -15,6 +15,7 @@ import { WechatyAdapter } from './adapter';
 import { adaptContact, adaptMessage, adaptRoom, fileBoxToUrl } from './utils';
 import { WechatyMessenger } from './message';
 import qrcodeTerminal from 'qrcode-terminal';
+import os from 'os';
 
 declare module 'koishi' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -29,7 +30,13 @@ export class WechatyBotConfig {
   @SchemaProperty({
     default: 'wechaty-puppet-wechat',
     description: 'Wechaty 使用的 Puppet。',
-    hidden: true,
+    hidden: os.platform() !== 'win32',
+    type: process.env.KOISHI_AGENT?.includes('Desktop')
+      ? Schema.const([
+          'wechaty-puppet-wechat',
+          ...(os.platform() === 'win32' ? ['wechaty-puppet-xp'] : []),
+        ])
+      : String,
   })
   puppet: string;
 
