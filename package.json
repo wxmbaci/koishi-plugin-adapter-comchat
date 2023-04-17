@@ -15,7 +15,7 @@
     "url": "https://code.mycard.moe/3rdeye/koishi-plugin-adapter-wechaty.git"
   },
   "author": "Nanahira <nanahira@momobako.com>",
-  "license": "MIT",
+  "license": "AGPL-3.0",
   "keywords": [
     "Koishi.js",
     "qqbot",
