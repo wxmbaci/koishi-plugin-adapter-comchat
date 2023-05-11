@@ -34,6 +34,12 @@ export class WechatyAdapter extends Adapter.Client<WechatyBot> {
         if (!payload) return;
         payload.timestamp ??= timestamp;
         const session = this.bot.session(payload);
+        if (
+          session.type === 'message' &&
+          Date.now() - this.bot.loginTime < 1000
+        ) {
+          return;
+        }
         this.bot.dispatch(session);
       });
     });
@@ -43,6 +49,7 @@ export class WechatyAdapter extends Adapter.Client<WechatyBot> {
     this.adaptEvent('message', async (message) => {
       const adaptedMessage = await adaptMessage(this.bot, message);
       if (!adaptedMessage) return;
+      // console.log(`Got message type ${message.type()}`);
       return {
         ...adaptedMessage,
         type:

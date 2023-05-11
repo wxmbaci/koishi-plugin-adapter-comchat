@@ -69,11 +69,14 @@ export default class WechatyBot extends Bot<
     return PluginDef(WechatyAdapter, this);
   }
 
+  loginTime: number;
+
   async initialize() {
     this.internal.on('login', async (user) => {
       this.selfId = user.id;
       this.username = user.name();
       this.avatar = await fileBoxToUrl(await user.avatar());
+      this.loginTime = Date.now();
       this.online();
     });
     this.internal.on('logout', () => {
